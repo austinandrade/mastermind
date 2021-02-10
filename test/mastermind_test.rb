@@ -15,32 +15,26 @@ class MastermindTest < Minitest::Test
 
 Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
 
-
-    # assert_equal welcome_message, mastermind.welcome_to_mastermind
     assert_output ("Welcome to MASTERMIND\n\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?\n") {mastermind.welcome_to_mastermind}
   end
 
   def test_instructions_message
     mastermind = Mastermind.new
 
-    # assert_equal "Hey these are instructions can you believe it?!!!!", mastermind.instructions_message
-    assert_output ("You must successfully guess the code the secret code. On each guess, you will learn the number of correct colors guessed as well as the number placed in the correct slots\n") {mastermind.instructions_message}
+    assert_output ("You must successfully guess the secret code. On each guess, you will learn the number of correct colors guessed as well as the number placed in the correct slots\n") {mastermind.instructions_message}
+  end
 
+  def test_create_secret_code
+    mastermind = Mastermind.new
+
+    code = "rrgy"
+
+    assert_equal code, mastermind.create_secret_code # maybe look at this later
   end
 
 
   def test_start_game
   end
 
-# do not need to include tests for methods involving user input
-  # def test_beginning_user_input
-  #   mastermind = Mastermind.new
-  #
-  #
-  #   user_input = p
-
-  #
-  #   assert_equal mastermind.start_game
-  # end
 
 end

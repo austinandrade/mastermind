@@ -1,7 +1,7 @@
 require 'pry'
 class Mastermind
   attr_reader :guess_count
-  def initialize #(winning_code)
+  def initialize#(winning_code)
     @guess_count = 0
     # @winning_code = winning_code
   end
@@ -35,7 +35,6 @@ What's your guess?"
     # puts secret_code
 
     player_game_input = gets.chomp
-
     # while player_guess != secret_code - instead of if?
     # SWITCH AROUND CONIDTIONS!!!
     if player_game_input == "q" || player_game_input == "quit"
@@ -63,26 +62,30 @@ You've taken #{guess_count} guess"
   end
 
   def instructions_message
-    instructions = "You must successfully guess the code the secret code. On each guess, you will learn the number of correct colors guessed as well as the number placed in the correct slots"
+    instructions = "You must successfully guess the secret code. On each guess, you will learn the number of correct colors guessed as well as the number placed in the correct slots"
 
      puts instructions
   end
 
-  # def create_secret_code
-  #   colors = [r, g, b, y]
-  #   @secret_code = colors.shuffle
-  #   # binding.pry
-  # end
+  def create_secret_code
+    colors = ['r', 'r', 'g', 'g', 'b', 'b', 'y', 'y']
+    shuffled_colors = colors.shuffle
+    color_collector = []
+    @winning_code = ""
 
+    shuffled_colors.each do |color|
+      if color_collector.length < 4
+        color_collector << color
+      end
+    end
+
+    @winning_code = color_collector.join("")
+
+  end
 end
 
 mastermind = Mastermind.new
 
 mastermind.welcome_to_mastermind
 mastermind.beginning_user_input
-# mastermind.create_code
-
-
-
-
-# would it make sense to put all messages in a separate file?
+mastermind.create_secret_code
