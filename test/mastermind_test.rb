@@ -24,12 +24,12 @@ Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
     assert_output ("You must successfully guess the secret code. On each guess, you will learn the number of correct colors guessed as well as the number placed in the correct slots\n") {mastermind.instructions_message}
   end
 
-  def test_create_secret_code
+  def test_create_winning_code
     mastermind = Mastermind.new
 
     code = "rrgy"
 
-    assert_equal code, mastermind.create_secret_code # maybe look at this later
+    assert_equal code, mastermind.create_winning_code # maybe look at this later
   end
 
 
