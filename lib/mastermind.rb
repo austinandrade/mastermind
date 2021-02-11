@@ -1,9 +1,11 @@
 require 'pry'
 class Mastermind
   attr_reader :guess_count
+
   def initialize (guess_count = nil, winning_code = nil)
     @guess_count = 1
-    @winning_code = winning_code
+    @winning_code = winning_code.nil? ? create_winning_code : winning_code
+    #ternary - if/else approach
   end
 
   def welcome_to_mastermind
@@ -57,7 +59,7 @@ What's your guess?"
         Mastermind.new(@guess_count, @winning_code).start_game
 
       elsif player_guess == "q" || player_guess == "quit"
-        return
+        exit #return was exit start_game method but not the file/class
 
       elsif player_guess.length < 4
         puts "ANSWER IS TOO SHORT!"
@@ -79,7 +81,7 @@ What's your guess?"
           play_or_quit_input = gets.chomp
 
         if play_or_quit_input ==  "p" || play_or_quit_input == "play"
-          Mastermind.new(@guess_count = nil, @winning_code).start_game
+          Mastermind.new.start_game
           # start_game
         else play_or_quit_input == "q" || play_or_quit_input == "quit"
           return
@@ -122,6 +124,6 @@ end
 
 mastermind = Mastermind.new
 
-mastermind.create_winning_code
+# mastermind.create_winning_code #don't need to call this b/c class does this to self
 mastermind.welcome_to_mastermind
 mastermind.beginning_user_input
