@@ -1,5 +1,5 @@
 # require './lib/mastermind.rb'
-require './lib/player_guess_matcher'
+# require './lib/player_guess_matcher'
 class Printer
   attr_reader :winning_code, :time_taken_to_win
   attr_accessor :guess_count, :player_guess
