@@ -1,5 +1,4 @@
-# require './lib/mastermind.rb'
-# require './lib/player_guess_matcher'
+require './lib/player_guess_matcher'
 class Printer
   attr_reader :winning_code, :time_taken_to_win
   attr_accessor :guess_count, :player_guess
@@ -8,6 +7,7 @@ class Printer
     @guess_count = guess_count
     @player_guess = player_guess
     @time_taken_to_win = time_taken_to_win
+    @instance_of_matcher = PlayerGuessMatcher.new(@winning_code, @player_guess)
   end
   def welcome_message
     welcome_message = "Welcome to MASTERMIND
@@ -17,14 +17,11 @@ class Printer
   def handle_guess_single_or_plural
     @guesses_or_guess = @guess_count > 1 ? "guesses" : "guess"
   end
-  def guess_feedback(player_guess) #had to add ability to pass in argument into method - because player_guess is user input??
+  def guess_feedback(player_guess, guess_count) #had to add ability to pass in argument into method - because player_guess is user input??
     puts "------------------"
     handle_guess_single_or_plural
-    # line 28 - @player_guess isn't reading, not in string when printed to terminal
-    # @number_of_correct_letters
-    # @number_of_correct_positions
-    guess_feedback = "'#{player_guess}' has 3 of the correct elements with 2 in the correct positions
-    You've taken #{@guess_count} #{@guesses_or_guess}"
+    guess_feedback = "'#{player_guess}' has #{@instance_of_matcher.check_number_of_correct_colors(player_guess)} of the correct elements with #{@instance_of_matcher.check_number_of_correct_color_and_position(player_guess)} in the correct positions
+    You've taken #{guess_count} #{@guesses_or_guess}"
     puts guess_feedback
   end
   def win_message

@@ -5,7 +5,7 @@ class Mastermind
   attr_reader :winning_code, :instance_of_matcher
   attr_accessor :guess_count
   def initialize (guess_count = nil, winning_code = nil)
-    @guess_count = 2 #guess_count.nil? ? increment_guess_count : guess_count
+    @guess_count = 0 #guess_count.zero? ? increment_guess_count : guess_count
     @winning_code = winning_code.nil? ? create_winning_code : winning_code
     #ternary - if/els
     # @player_guess = player_guess
@@ -26,19 +26,10 @@ class Mastermind
       @instance_of_printer.quit_message
         exit
     end
-    # handling_beginning_input
   end
-  # def handling_beginning_input
-  #   if player_input == "p" || player_input == "play"
-  #       start_game
-  #   elsif player_input == "i" || player_input == "instructions"
-  #       instructions_message
-  #   else player_input == "q" || player_input == "quit"
-  #       return
-  #   end
-  # end
   def game_logic(player_guess)
-    @guess_count += 1
+    # @guess_count += 1
+    increment_guess_count
     until @guess_count == 1000000
       if @player_guess == "c" || @player_guess == "cheat"
         @instance_of_printer.cheat_message
@@ -57,19 +48,19 @@ class Mastermind
           play_or_quit_input = gets.chomp
           post_win(play_or_quit_input)
       else @player_guess != @winning_code
-        @instance_of_matcher.check_player_guess(@player_guess)
-        @instance_of_printer.guess_feedback(@player_guess)
+        @instance_of_matcher.check_number_of_correct_colors(@player_guess)
+        @instance_of_matcher.check_number_of_correct_color_and_position(@player_guess)
+        @instance_of_printer.guess_feedback(@player_guess, @guess_count)
         # guess_feedback = "'#{player_guess}' has 3 of the correct elements with 2 in the correct positions
         # You've taken #{@guess_count} guess"
         # puts guess_feedback
-        @guess_count += 1
-        increment_guess_count
+        # @guess_count += 1
         Mastermind.new(@guess_count, @winning_code).start_game
       end
     end
   end
   def increment_guess_count
-    @guess_count +=1
+    @guess_count += 1
   end
   def post_win(play_or_quit_input)
     if play_or_quit_input ==  "p" || play_or_quit_input == "play"
@@ -82,7 +73,8 @@ class Mastermind
   def start_game
     @instance_of_printer.start_game_message
     @player_guess = gets.chomp
-    @guess_count += 1
+    # guess_count = 1
+    # guess_count += 1
     game_logic(@player_guess)
   end
   def create_winning_code
