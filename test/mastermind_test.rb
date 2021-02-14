@@ -1,6 +1,8 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/mastermind.rb'
+require './lib/player_guess_matcher.rb'
+require "./lib/printer.rb"
 
 class MastermindTest < Minitest::Test
 
