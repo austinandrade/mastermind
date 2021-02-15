@@ -20,7 +20,7 @@ class Mastermind
   def beginning_user_input
     player_input = gets.chomp
     if player_input == "p" || player_input == "play"
-        start_game
+        start_game.start_time
     elsif player_input == "i" || player_input == "instructions"
         @instance_of_printer.instructions_message
     else player_input == "q" || player_input == "quit"
@@ -50,7 +50,7 @@ class Mastermind
         @instance_of_printer.guess_feedback(@player_guess, @guess_count)
       elsif @player_guess == @winning_code
         @game_over = true
-        @instance_of_printer.win_message
+        @instance_of_printer.win_message(guess_count)
           play_or_quit_input = gets.chomp
           post_win(play_or_quit_input)
           break
@@ -93,19 +93,25 @@ class Mastermind
 
   def start_time
   start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+  starty_time = []
+  stary_time << start_time
+  starty_time
   end
 
   def end_time
   end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+  endy_time = []
+  endy_time << end_time
+  endy_time
   end
 
   def total_time
-  unrounded_time = start_time - end_time
+  unrounded_time = end_time[0] - start_time[0]
   seconds = total_time % 60
   minutes = (seconds / 60) % 60
   seconds_rounded = seconds.round(1)
   minutes_rounded = minutes.floor(1)
-  seconds_rounded
+  unrounded_time
   end
 
 
