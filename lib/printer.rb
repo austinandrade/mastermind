@@ -5,14 +5,19 @@ class Printer
   attr_reader :winning_code, :time_taken_to_win
   attr_accessor :guess_count, :player_guess
 
-  def initialize(winning_code, guess_count, player_guess) #time_taken_to_win) # change nil if need be
+  def initialize(winning_code)
     @winning_code = winning_code
-    @guess_count = guess_count
-    @player_guess = player_guess
-    # @time_taken_to_win = time_taken_to_win
-    @instance_of_matcher = PlayerGuessMatcher.new(@winning_code, @player_guess)
-    # @instance_of_time = Time.new(@starting_time, @end_time)
-    # @instance_of_mastermind = Mastermind.new(@guess_count, @winning_code)
+    @instance_of_matcher = PlayerGuessMatcher.new(@winning_code)
+  end
+
+  def player_guess_error_message(player_guess)
+      player_guess.chars.each do |color|
+        if !(color).match(/[rybg]/)
+          puts "------------------"
+          puts "ERROR: Choose four colors: R G B Y"
+          puts "Guess again:"
+        end
+    end
   end
 
   def welcome_message
@@ -48,7 +53,7 @@ class Printer
     handle_guess_singular_or_plural(guess_count)
     # handle_minute_singular_or_plural(end_time_minutes, start_time_minutes)
     win_message = "Congratulations! You guessed the sequence '#{@winning_code}' in #{guess_count} #{@guesses_or_guess} over #{end_time_minutes - start_time_minutes} minutes,
-    #{start_time_seconds - end_time_seconds} seconds.
+    #{end_time_seconds - start_time_seconds} seconds.
     Do you want to (p)lay again or (q)uit?"
 
     puts win_message

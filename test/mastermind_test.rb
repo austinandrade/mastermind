@@ -23,6 +23,7 @@ class MastermindTest < Minitest::Test
     # skip
     mastermind = Mastermind.new(@guess_count, @winning_code)
     assert_equal 4, mastermind.create_winning_code.length
+    # come back to this
   end
 
   def test_it_can_print_welcome_message
@@ -37,4 +38,6 @@ class MastermindTest < Minitest::Test
     mastermind = Mastermind.new(@guess_count, @winning_code)
     assert_equal 0, mastermind.guess_count
   end
+
+  # write tests for Time methods?
 end
