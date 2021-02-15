@@ -1,4 +1,5 @@
 require 'pry'
+require 'time'
 require './lib/printer'
 require './lib/player_guess_matcher'
 class Mastermind
@@ -10,6 +11,8 @@ class Mastermind
     @instance_of_printer = Printer.new(@winning_code, @guess_count, @player_guess)
     @instance_of_matcher = PlayerGuessMatcher.new(@winning_code, @player_guess)
     @game_over = false
+    # @start_time = nil
+    # @end_time = nil
   end
   def welcome_to_mastermind
     @instance_of_printer.welcome_message
@@ -46,11 +49,14 @@ class Mastermind
         @instance_of_matcher.check_number_of_correct_color_and_position(@player_guess)
         @instance_of_printer.guess_feedback(@player_guess, @guess_count)
       else @player_guess == @winning_code
+        end_time
+        # time_differences
+        # total_time
         @game_over = true
-        @instance_of_printer.win_message(@guess_count)
-          play_or_quit_input = gets.chomp
-          post_win(play_or_quit_input)
-          break
+        @instance_of_printer.win_message(@guess_count, @end_time_minutes, @start_time_minutes, @end_time_seconds, @start_time_seconds)
+        play_or_quit_input = gets.chomp
+        post_win(play_or_quit_input)
+        break
         # guess_feedback = "'#{player_guess}' has 3 of the correct elements with 2 in the correct positions
         # You've taken #{@guess_count} guess"
         # puts guess_feedback
@@ -71,6 +77,7 @@ class Mastermind
   def start_game
     @instance_of_printer.start_game_message
     @player_guess = gets.chomp
+    start_time
     # guess_count = 1
     # guess_count += 1
     game_logic(@player_guess)
@@ -88,13 +95,29 @@ class Mastermind
     @winning_code = color_collector.join("")
   end
   def start_time
-  start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+  # @start_time_minutes = Time.now.utc.strftime("%H%M%S").to_i
+  @start_time_minutes = Time.now.utc.strftime("%M").to_i
+  # @start_time_seconds = Time.now.utc.strftime("%H%M%S").to_i
+  @start_time_seconds = Time.now.utc.strftime("%S").to_i
   end
   def end_time
-  end_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+  # @end_time_minutes = Time.now.utc.strftime("%H%M%S").to_i
+  @end_time_minutes = Time.now.utc.strftime("%M").to_i
+  # @end_time_seconds = Time.now.utc.strftime("%H%M%S").to_i
+  @end_time_seconds = Time.now.utc.strftime("%S").to_i
+
+
+  binding.pry
   end
+
+  # def time_differences
+  # @minute_difference = @end_time_minutes - @start_time_minutes
+  # @second_difference = @end_time_seconds - @end_time_seconds
+  # # binding.pry
+  # end
+
   def total_time
-  unrounded_time = start_time - end_time
+  unrounded_time = @start_time - @end_time
   seconds = total_time % 60
   minutes = (seconds / 60) % 60
   seconds_rounded = seconds.round(1)

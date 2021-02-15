@@ -27,6 +27,10 @@ class Printer
     @guesses_or_guess = guess_count > 1 ? "guesses" : "guess"
   end
 
+  # def handle_minute_singular_or_plural(end_time_minutes, start_time_minutes)
+  #   @minutes_or_minute = end_time_minutes - start_time_minutes = 1 ? "minute" : "minutes" #instance variables?
+  # end
+
   def guess_feedback(player_guess, guess_count) #had to add ability to pass in argument into method - because player_guess is user input??
     puts "------------------"
 
@@ -38,12 +42,13 @@ class Printer
     puts guess_feedback
   end
 
-  def win_message(guess_count)
+  def win_message(guess_count, end_time_minutes, start_time_minutes, end_time_seconds, start_time_seconds)
     puts "------------------"
 
     handle_guess_singular_or_plural(guess_count)
-    win_message = "Congratulations! You guessed the sequence '#{@winning_code}' in #{guess_count} #{@guesses_or_guess} over #{@minutes} minutes,
-    #{@seconds} seconds.
+    # handle_minute_singular_or_plural(end_time_minutes, start_time_minutes)
+    win_message = "Congratulations! You guessed the sequence '#{@winning_code}' in #{guess_count} #{@guesses_or_guess} over #{end_time_minutes - start_time_minutes} minutes,
+    #{start_time_seconds - end_time_seconds} seconds.
     Do you want to (p)lay again or (q)uit?"
 
     puts win_message

@@ -55,36 +55,36 @@ class PlayerGuessMatcher
     return number_of_correct_positions
   end
 
-  def start_time
-    start = Time.now.to_f
-    # start_time_seconds_array = []
-    # start_time = Process.clock_gettime(Process::CLOCK_REALTIME, :second)
-    # # start_time_second = start_time.sec
-    # start_time_seconds_array << start_time
-
-    # Process.clock_gettime(Process::CLOCK_REALTIME, :nanosecond)
-    # return start_time_var
-    # @new_start_time = start_time / (24 * 60 * 60.0)
-  end
-
-  def end_time
-    finish = Time.now.to_f
-    # end_time_seconds_array = []
-    # end_time = Process.clock_gettime(Process::CLOCK_REALTIME, :second)
-    # # end_time_second = end_time.sec
-    # end_time_seconds_array << end_time
-
-    #Process.clock_gettime(Process::CLOCK_REALTIME, :nanosecond)
-    # @new_end_time = end_time / (24 * 60 * 60.0)
-    # return end_time_var
-  end
+  # def start_time
+  #   start = Time.now.to_f
+  #   # start_time_seconds_array = []
+  #   # start_time = Process.clock_gettime(Process::CLOCK_REALTIME, :second)
+  #   # # start_time_second = start_time.sec
+  #   # start_time_seconds_array << start_time
   #
-  def game_time
-    @seconds = (end_time - start_time) % 60
-    @minutes = (((end_time - start_time) / 60) % 60).to_i
-    # binding.pry
-    # end_time[0] - start_time[0]
-  end
+  #   # Process.clock_gettime(Process::CLOCK_REALTIME, :nanosecond)
+  #   # return start_time_var
+  #   # @new_start_time = start_time / (24 * 60 * 60.0)
+  # end
+  #
+  # def end_time
+  #   finish = Time.now.to_f
+  #   # end_time_seconds_array = []
+  #   # end_time = Process.clock_gettime(Process::CLOCK_REALTIME, :second)
+  #   # # end_time_second = end_time.sec
+  #   # end_time_seconds_array << end_time
+  #
+  #   #Process.clock_gettime(Process::CLOCK_REALTIME, :nanosecond)
+  #   # @new_end_time = end_time / (24 * 60 * 60.0)
+  #   # return end_time_var
+  # end
+  # #
+  # def game_time
+  #   @seconds = (end_time - start_time) % 60
+  #   @minutes = (((end_time - start_time) / 60) % 60).to_i
+  #   binding.pry
+  #   # end_time[0] - start_time[0]
+  # end
 end
 
 
