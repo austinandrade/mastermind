@@ -1,5 +1,9 @@
 require './lib/player_guess_matcher'
+<<<<<<< HEAD
 require './lib/time'
+=======
+
+>>>>>>> f1269c4d75c8cb202d58dc290e7ba374c5842e5c
 
 class Printer
   attr_reader :winning_code, :time_taken_to_win
@@ -8,6 +12,19 @@ class Printer
   def initialize(winning_code)
     @winning_code = winning_code
     @instance_of_matcher = PlayerGuessMatcher.new(@winning_code)
+<<<<<<< HEAD
+  end
+
+  def player_guess_error_message(player_guess)
+      player_guess.chars.each do |color|
+        if !(color).match(/[rybg]/)
+          puts "------------------"
+          puts "ERROR: Choose four colors: R G B Y"
+          puts "Guess again:"
+        end
+    end
+=======
+>>>>>>> f1269c4d75c8cb202d58dc290e7ba374c5842e5c
   end
 
   def player_guess_error_message(player_guess)
@@ -19,9 +36,11 @@ class Printer
         end
     end
   end
+
   def welcome_message
     welcome_message = "Welcome to MASTERMIND
     Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
+
     puts welcome_message
   end
 
@@ -29,9 +48,6 @@ class Printer
     @guesses_or_guess = guess_count > 1 ? "guesses" : "guess"
   end
 
-  # def handle_minute_singular_or_plural(end_time_minutes, start_time_minutes)
-  #   @minutes_or_minute = end_time_minutes - start_time_minutes = 1 ? "minute" : "minutes" #instance variables?
-  # end
 
   def guess_feedback(player_guess, guess_count) #had to add ability to pass in argument into method - because player_guess is user input??
     puts "------------------"
@@ -44,20 +60,20 @@ class Printer
     puts guess_feedback
   end
 
-  def win_message(guess_count, end_time_minutes, start_time_minutes, end_time_seconds, start_time_seconds)
+  def win_message(guess_count, time_message)
     puts "------------------"
 
     handle_guess_singular_or_plural(guess_count)
     # handle_minute_singular_or_plural(end_time_minutes, start_time_minutes)
-    win_message = "Congratulations! You guessed the sequence '#{@winning_code}' in #{guess_count} #{@guesses_or_guess} over #{end_time_minutes - start_time_minutes} minutes,
-    #{end_time_seconds - start_time_seconds} seconds.
+    win_message = "Congratulations! You guessed the sequence '#{@winning_code}' in #{guess_count} #{@guesses_or_guess} over #{time_message}!
     Do you want to (p)lay again or (q)uit?"
+
     puts win_message
   end
-<<<<<<< HEAD
+
 =======
 
->>>>>>> 81ea868ea2dba0407b59254f422f68cb3e3fd281
+>>>>>>> f1269c4d75c8cb202d58dc290e7ba374c5842e5c
   def start_game_message
     puts "------------------"
     start_game_message = "I have generated a beginner sequence with four elements made up of:
