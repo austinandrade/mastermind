@@ -1,18 +1,12 @@
 require './lib/player_guess_matcher'
-<<<<<<< HEAD
 require './lib/time'
-=======
-
->>>>>>> f1269c4d75c8cb202d58dc290e7ba374c5842e5c
-
 class Printer
   attr_reader :winning_code, :time_taken_to_win
   attr_accessor :guess_count, :player_guess
 
   def initialize(winning_code)
     @winning_code = winning_code
-    @instance_of_matcher = PlayerGuessMatcher.new(@winning_code)
-<<<<<<< HEAD
+    @instance_of_matcher = PlayerGuessMatcher.new(@player_guess, @winning_code)
   end
 
   def player_guess_error_message(player_guess)
@@ -23,8 +17,6 @@ class Printer
           puts "Guess again:"
         end
     end
-=======
->>>>>>> f1269c4d75c8cb202d58dc290e7ba374c5842e5c
   end
 
   def player_guess_error_message(player_guess)
@@ -54,7 +46,7 @@ class Printer
 
     handle_guess_singular_or_plural(guess_count)
 
-    guess_feedback = "'#{player_guess}' has #{@instance_of_matcher.check_number_of_correct_colors(player_guess)} of the correct elements with #{@instance_of_matcher.check_number_of_correct_color_and_position(player_guess)} in the correct positions
+    guess_feedback = "'#{player_guess}' has #{@instance_of_matcher.check_number_of_correct_colors(player_guess, winning_code)} of the correct elements with #{@instance_of_matcher.check_number_of_correct_color_and_position(player_guess)} in the correct positions
     You've taken #{guess_count} #{@guesses_or_guess}"
 
     puts guess_feedback
@@ -71,9 +63,6 @@ class Printer
     puts win_message
   end
 
-=======
-
->>>>>>> f1269c4d75c8cb202d58dc290e7ba374c5842e5c
   def start_game_message
     puts "------------------"
     start_game_message = "I have generated a beginner sequence with four elements made up of:
