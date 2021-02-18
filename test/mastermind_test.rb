@@ -3,7 +3,8 @@ require './lib/printer'
 
 class MastermindTest < Minitest::Test
   def test_it_exists
-    mastermind = Mastermind.new
+    # skip
+    mastermind = Mastermind.new(@guess_count, @winning_code)
     assert_instance_of Mastermind, mastermind
   end
 

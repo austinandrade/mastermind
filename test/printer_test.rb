@@ -13,7 +13,6 @@ class PrinterTest < Minitest::Test
   end
 
   def test_handle_guess_singular_or_plural
-    # skip
     guess_count = 2
     winning_code = "rgby"
     printer = Printer.new(winning_code)
@@ -32,8 +31,6 @@ class PrinterTest < Minitest::Test
 
     assert_equal expected, printer.guess_feedback(player_guess, guess_count)
   end
-
-
 
   def test_game_logic_messages
     game = Game.new

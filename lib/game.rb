@@ -47,10 +47,6 @@ class Game
     @winning_code = color_collector.join("")
   end
 
-  # def winning_code_shuffle(winning_code)
-  # winning_code.split("").shuffle.join
-  # end
-
   def set_start_time
    @start_time = Time.now
   end
@@ -88,6 +84,7 @@ class Game
         set_end_time
         time_message = time_elapsed
         @instance_of_printer.win_message(@guess_count, time_message)
+
         play_or_quit_input = gets.chomp
         win = post_win(play_or_quit_input)
         return win
