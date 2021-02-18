@@ -71,7 +71,6 @@ Use (q)uit at any time to end the game.
 What's your guess?"
     puts start_game_message
     puts "------------------"
-
   end
 
   def instructions_message

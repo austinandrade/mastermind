@@ -1,4 +1,3 @@
-require 'pry'
 require './lib/printer'
 require './lib/player_guess_matcher'
 require './lib/game'
@@ -32,7 +31,6 @@ class Mastermind
   def play_game
   @game = Game.new
   end
-
 end
 
 mastermind = Mastermind.new
