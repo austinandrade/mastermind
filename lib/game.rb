@@ -2,6 +2,7 @@ require './lib/printer'
 require './lib/player_guess_matcher'
 
 class Game
+  attr_reader :guess_count, :game_over, :start_time, :end_time
   def initialize
     @winning_code = create_winning_code
     @guess_count = 0
@@ -26,8 +27,6 @@ class Game
     # winning_code_shuffle(@winning_code)
     if play_or_quit_input ==  "p" || play_or_quit_input == "play"
      return true
-   elsif player_input == "i" || player_input == "instructions"
-      @instance_of_printer.instructions_message
     else play_or_quit_input == "q" || play_or_quit_input == "quit"
       @instance_of_printer.quit_message
       return false

@@ -21,7 +21,9 @@ class Mastermind
         end
     elsif player_input == "i" || player_input == "instructions"
          @instance_of_printer.instructions_message
-         play_game.start_game
+         while play_game.start_game == true
+           play_game.start_game
+         end
     else player_input == "q" || player_input == "quit"
       @instance_of_printer.quit_message
         exit
@@ -29,7 +31,6 @@ class Mastermind
   end
   def play_game
   @game = Game.new
-
   end
 
 end

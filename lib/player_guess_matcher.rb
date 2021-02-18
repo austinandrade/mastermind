@@ -1,5 +1,6 @@
 require 'pry'
 class PlayerGuessMatcher
+  attr_reader :winning_code
   def initialize(player_guess, winning_code)
     @player_guess = player_guess
     @winning_code = winning_code
