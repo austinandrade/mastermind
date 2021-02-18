@@ -1,5 +1,4 @@
 require 'pry'
-
 class PlayerGuessMatcher
   def initialize(winning_code)
     @winning_code = winning_code

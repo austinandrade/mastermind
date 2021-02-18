@@ -19,12 +19,9 @@ class Printer
         end
     end
   end
-
   def welcome_message
     welcome_message = "Welcome to MASTERMIND
-
     Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
-
     puts welcome_message
   end
 
@@ -55,10 +52,9 @@ class Printer
     win_message = "Congratulations! You guessed the sequence '#{@winning_code}' in #{guess_count} #{@guesses_or_guess} over #{end_time_minutes - start_time_minutes} minutes,
     #{end_time_seconds - start_time_seconds} seconds.
     Do you want to (p)lay again or (q)uit?"
-
     puts win_message
   end
-
+  
   def start_game_message
     puts "------------------"
     start_game_message = "I have generated a beginner sequence with four elements made up of:
@@ -67,7 +63,6 @@ Use (q)uit at any time to end the game.
 What's your guess?"
     puts start_game_message
     puts "------------------"
-
   end
 
   def instructions_message
@@ -83,7 +78,7 @@ What's your guess?"
     p "Exiting..."
     puts "------------------"
   end
-
+  
   def answer_is_too_long_message
     puts "------------------"
     puts "ANSWER IS TOO LONG!"
