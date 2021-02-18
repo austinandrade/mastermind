@@ -28,12 +28,13 @@ class Mastermind
         exit
     end
   end
+
   def play_game
   @game = Game.new
   end
 end
 
-mastermind = Mastermind.new
-mastermind.play_game
-mastermind.welcome_to_mastermind
-mastermind.beginning_user_input
+# mastermind = Mastermind.new
+# mastermind.play_game
+# mastermind.welcome_to_mastermind
+# mastermind.beginning_user_input

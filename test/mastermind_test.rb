@@ -1,10 +1,13 @@
+require 'minitest/autorun'
+require 'minitest/pride'
 require './lib/mastermind'
 require './lib/printer'
+# require './lib/player_guess_matcher'
+require 'pry'
 
 class MastermindTest < Minitest::Test
   def test_it_exists
-    # skip
-    mastermind = Mastermind.new(@guess_count, @winning_code)
+    mastermind = Mastermind.new
     assert_instance_of Mastermind, mastermind
   end
 
@@ -17,4 +20,5 @@ class MastermindTest < Minitest::Test
     mastermind = Mastermind.new
     assert_equal Game.new, mastermind.play_game
   end
+  
 end
