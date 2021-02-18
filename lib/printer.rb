@@ -1,6 +1,5 @@
 require './lib/player_guess_matcher'
 
-
 class Printer
   attr_reader :winning_code, :time_taken_to_win
   attr_accessor :guess_count, :player_guess
@@ -31,7 +30,6 @@ class Printer
     @guesses_or_guess = guess_count > 1 ? "guesses" : "guess"
   end
 
-
   def guess_feedback(player_guess, guess_count) #had to add ability to pass in argument into method - because player_guess is user input??
     puts "------------------"
 
@@ -43,12 +41,14 @@ class Printer
     puts guess_feedback
   end
 
+
   def win_message(guess_count, time_message)
     puts "------------------"
 
     handle_guess_singular_or_plural(guess_count)
     # handle_minute_singular_or_plural(end_time_minutes, start_time_minutes)
     win_message = "Congratulations! You guessed the sequence '#{@winning_code}' in #{guess_count} #{@guesses_or_guess} over #{time_message}!
+
     Do you want to (p)lay again or (q)uit?"
 
     puts win_message

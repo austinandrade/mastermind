@@ -42,6 +42,7 @@ class Game
     @winning_code = color_collector.join("")
   end
 
+
   def set_start_time
    @start_time = Time.now
   end
@@ -75,10 +76,12 @@ class Game
         @instance_of_matcher.check_number_of_correct_color_and_position(@player_guess)
         @instance_of_printer.guess_feedback(@player_guess, @guess_count)
       else @player_guess == @winning_code
+
         set_end_time
         time_message = time_elapsed
         @game_over = true
         @instance_of_printer.win_message(@guess_count, time_message)
+
         play_or_quit_input = gets.chomp
         post_win(play_or_quit_input)
         break
