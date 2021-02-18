@@ -6,7 +6,17 @@ class Printer
 
   def initialize(winning_code)
     @winning_code = winning_code
-    @instance_of_matcher = PlayerGuessMatcher.new(@winning_code)
+    @instance_of_matcher = PlayerGuessMatcher.new(@player_guess, @winning_code)
+  end
+
+  def player_guess_error_message(player_guess)
+      player_guess.chars.each do |color|
+        if !(color).match(/[rybg]/)
+          puts "------------------"
+          puts "ERROR: Choose four colors: R G B Y"
+          puts "Guess again:"
+        end
+    end
   end
 
   def player_guess_error_message(player_guess)
@@ -35,7 +45,7 @@ class Printer
 
     handle_guess_singular_or_plural(guess_count)
 
-    guess_feedback = "'#{player_guess}' has #{@instance_of_matcher.check_number_of_correct_colors(player_guess)} of the correct elements with #{@instance_of_matcher.check_number_of_correct_color_and_position(player_guess)} in the correct positions
+    guess_feedback = "'#{player_guess}' has #{@instance_of_matcher.check_number_of_correct_colors(player_guess, winning_code)} of the correct elements with #{@instance_of_matcher.check_number_of_correct_color_and_position(player_guess)} in the correct positions
     You've taken #{guess_count} #{@guesses_or_guess}"
 
     puts guess_feedback
@@ -62,7 +72,6 @@ Use (q)uit at any time to end the game.
 What's your guess?"
     puts start_game_message
     puts "------------------"
-
   end
 
   def instructions_message

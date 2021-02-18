@@ -2,12 +2,13 @@ require './lib/printer'
 require './lib/player_guess_matcher'
 
 class Game
-  def initialize(winning_code)
+  attr_reader :guess_count, :game_over, :start_time, :end_time
+  def initialize
     @winning_code = create_winning_code
     @guess_count = 0
     @game_over = false
     @instance_of_printer = Printer.new(@winning_code)
-    @instance_of_matcher = PlayerGuessMatcher.new(@winning_code)
+    @instance_of_matcher = PlayerGuessMatcher.new(@player_guess, @winning_code)
     @start_time = nil
     @end_time = nil
   end
@@ -21,11 +22,15 @@ class Game
   end
 
   def post_win(play_or_quit_input)
+
+    @game_over = false
+    # winning_code_shuffle(@winning_code)
     if play_or_quit_input ==  "p" || play_or_quit_input == "play"
-      start_game
+     return true
     else play_or_quit_input == "q" || play_or_quit_input == "quit"
       @instance_of_printer.quit_message
-      exit
+      return false
+      # exit
     end
   end
 
@@ -41,7 +46,6 @@ class Game
     end
     @winning_code = color_collector.join("")
   end
-
 
   def set_start_time
    @start_time = Time.now
@@ -72,18 +76,18 @@ class Game
       elsif @player_guess != @winning_code
         @guess_count += 1
         # @instance_of_printer.player_guess_error_message(@player_guess)
-        @instance_of_matcher.check_number_of_correct_colors(@player_guess)
+        @instance_of_matcher.check_number_of_correct_colors(@player_guess, @winning_code)
         @instance_of_matcher.check_number_of_correct_color_and_position(@player_guess)
         @instance_of_printer.guess_feedback(@player_guess, @guess_count)
-      else @player_guess == @winning_code
-
+      elsif @player_guess == @winning_code
+        @game_over = true
         set_end_time
         time_message = time_elapsed
-        @game_over = true
         @instance_of_printer.win_message(@guess_count, time_message)
 
         play_or_quit_input = gets.chomp
-        post_win(play_or_quit_input)
+        win = post_win(play_or_quit_input)
+        return win
         break
       end
       @player_guess = gets.chomp
