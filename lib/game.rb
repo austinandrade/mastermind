@@ -8,12 +8,14 @@ class Game
     @game_over = false
     @instance_of_printer = Printer.new(@winning_code)
     @instance_of_matcher = PlayerGuessMatcher.new(@winning_code)
+    @start_time = nil
+    @end_time = nil
   end
 
   def start_game
-    start_time
     @instance_of_printer.start_game_message
     @player_guess = gets.chomp
+    set_start_time
     # @instance_of_printer.player_guess_error_message(@player_guess)
     game_logic(@player_guess)
   end
@@ -26,6 +28,7 @@ class Game
       exit
     end
   end
+
   def create_winning_code
     colors = ['r', 'r', 'g', 'g', 'b', 'b', 'y', 'y']
     shuffled_colors = colors.shuffle
@@ -39,17 +42,21 @@ class Game
     @winning_code = color_collector.join("")
   end
 
-  def start_time
-    # @start_time_minutes = Time.now.utc.strftime("%H%M%S").to_i
-    @start_time_minutes = Time.now.utc.strftime("%M").to_i
-    # @start_time_seconds = Time.now.utc.strftime("%H%M%S").to_i
-    @start_time_seconds = Time.now.utc.strftime("%S").to_i
+
+  def set_start_time
+   @start_time = Time.now
   end
-  def end_time
-    # @end_time_minutes = Time.now.utc.strftime("%H%M%S").to_i
-    @end_time_minutes = Time.now.utc.strftime("%M").to_i
-    # @end_time_seconds = Time.now.utc.strftime("%H%M%S").to_i
-    @end_time_seconds = Time.now.utc.strftime("%S").to_i
+
+  def set_end_time
+    @end_time = Time.now
+  end
+
+  def time_elapsed
+    elapsed = @end_time - @start_time
+    total = elapsed / 60
+    minutes = total.to_i
+    seconds = ((total.round(2) - minutes) * 100).to_i
+    "#{minutes} minutes and #{seconds} seconds"
   end
 
   def game_logic(player_guess)
@@ -69,9 +76,12 @@ class Game
         @instance_of_matcher.check_number_of_correct_color_and_position(@player_guess)
         @instance_of_printer.guess_feedback(@player_guess, @guess_count)
       else @player_guess == @winning_code
-        end_time
+
+        set_end_time
+        time_message = time_elapsed
         @game_over = true
-        @instance_of_printer.win_message(@guess_count, @end_time_minutes, @start_time_minutes, @end_time_seconds, @start_time_seconds)
+        @instance_of_printer.win_message(@guess_count, time_message)
+
         play_or_quit_input = gets.chomp
         post_win(play_or_quit_input)
         break

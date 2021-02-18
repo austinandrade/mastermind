@@ -1,5 +1,4 @@
 require './lib/player_guess_matcher'
-require './lib/time'
 
 class Printer
   attr_reader :winning_code, :time_taken_to_win
@@ -19,19 +18,17 @@ class Printer
         end
     end
   end
+
   def welcome_message
     welcome_message = "Welcome to MASTERMIND
     Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
+
     puts welcome_message
   end
 
   def handle_guess_singular_or_plural(guess_count)
     @guesses_or_guess = guess_count > 1 ? "guesses" : "guess"
   end
-
-  # def handle_minute_singular_or_plural(end_time_minutes, start_time_minutes)
-  #   @minutes_or_minute = end_time_minutes - start_time_minutes = 1 ? "minute" : "minutes" #instance variables?
-  # end
 
   def guess_feedback(player_guess, guess_count) #had to add ability to pass in argument into method - because player_guess is user input??
     puts "------------------"
@@ -44,17 +41,19 @@ class Printer
     puts guess_feedback
   end
 
-  def win_message(guess_count, end_time_minutes, start_time_minutes, end_time_seconds, start_time_seconds)
+
+  def win_message(guess_count, time_message)
     puts "------------------"
 
     handle_guess_singular_or_plural(guess_count)
     # handle_minute_singular_or_plural(end_time_minutes, start_time_minutes)
-    win_message = "Congratulations! You guessed the sequence '#{@winning_code}' in #{guess_count} #{@guesses_or_guess} over #{end_time_minutes - start_time_minutes} minutes,
-    #{end_time_seconds - start_time_seconds} seconds.
+    win_message = "Congratulations! You guessed the sequence '#{@winning_code}' in #{guess_count} #{@guesses_or_guess} over #{time_message}!
+
     Do you want to (p)lay again or (q)uit?"
+
     puts win_message
   end
-  
+
   def start_game_message
     puts "------------------"
     start_game_message = "I have generated a beginner sequence with four elements made up of:
@@ -63,6 +62,7 @@ Use (q)uit at any time to end the game.
 What's your guess?"
     puts start_game_message
     puts "------------------"
+
   end
 
   def instructions_message
@@ -78,7 +78,7 @@ What's your guess?"
     p "Exiting..."
     puts "------------------"
   end
-  
+
   def answer_is_too_long_message
     puts "------------------"
     puts "ANSWER IS TOO LONG!"
